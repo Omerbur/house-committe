@@ -1,0 +1,61 @@
+{
+    "name": "Announcement",
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Announcement title"
+      },
+      "content": {
+        "type": "string",
+        "description": "Announcement content"
+      },
+      "category": {
+        "type": "string",
+        "enum": [
+          "general",
+          "maintenance",
+          "event",
+          "urgent"
+        ],
+        "default": "general",
+        "description": "Announcement category"
+      },
+      "pinned": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether announcement is pinned"
+      },
+      "comments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "default": []
+      }
+    },
+    "required": [
+      "title",
+      "content"
+    ],
+    "rls": {
+      "read": {},
+      "write": {
+        "user_condition": {
+          "role": "admin"
+        }
+      }
+    }
+  }

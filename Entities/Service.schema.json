@@ -1,0 +1,64 @@
+{
+    "name": "Service",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Service provider name"
+      },
+      "category": {
+        "type": "string",
+        "enum": [
+          "plumbing",
+          "electrical",
+          "cleaning",
+          "maintenance",
+          "painting",
+          "other"
+        ],
+        "description": "Service category"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Contact phone"
+      },
+      "email": {
+        "type": "string",
+        "description": "Contact email"
+      },
+      "description": {
+        "type": "string",
+        "description": "Service description"
+      },
+      "rating": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 5,
+        "description": "Service rating"
+      },
+      "recommended_by": {
+        "type": "string",
+        "description": "User who recommended this service"
+      }
+    },
+    "required": [
+      "name",
+      "category",
+      "phone"
+    ],
+    "rls": {
+      "read": {},
+      "write": {
+        "$or": [
+          {
+            "recommended_by": "{{user.id}}"
+          },
+          {
+            "user_condition": {
+              "role": "admin"
+            }
+          }
+        ]
+      }
+    }
+  }

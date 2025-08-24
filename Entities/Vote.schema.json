@@ -1,0 +1,68 @@
+{
+    "name": "Vote",
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Poll title"
+      },
+      "description": {
+        "type": "string",
+        "description": "Poll description"
+      },
+      "options": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Voting options"
+      },
+      "deadline": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Voting deadline"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "active",
+          "closed"
+        ],
+        "default": "active",
+        "description": "Poll status"
+      },
+      "votes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string"
+            },
+            "option": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "default": []
+      }
+    },
+    "required": [
+      "title",
+      "description",
+      "options",
+      "deadline"
+    ],
+    "rls": {
+      "read": {},
+      "write": {
+        "user_condition": {
+          "role": "admin"
+        }
+      }
+    }
+  }
